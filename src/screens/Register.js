@@ -1,111 +1,118 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, TextInput } from "react-native";
+import { useState } from "react";
 import { auth, db } from "../firebase/config";
 
-export default function Register({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+function Register(props) {
+    const [email, setEmail] = useState("");
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [registerError, setRegisterError] = useState("");
 
-  const onSubmit = () => {
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        console.log('Usuario autenticado:', userCredential.user.email);
-        db.collection('users').add({
-          email: email,
-          username: username,
-          createdAt: Date.now()
-        })
-        .then(() => {
-          console.log('Datos guardados en la colección users');
-          navigation.navigate('Login');
-        })
-        .catch(err => console.log('Error al guardar en BD:', err));
-        
-      })
-      .catch((err) => {
-        console.log(err);
-        setError('Hubo un error al registrar el usuario.');
-      });
-  };
+    function onSubmit() {
+        auth.createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                db.collection("users").add({
+                    email: email,
+                    username: userName,
+                    createdAt: Date.now()
+                })
+                .then(() => {
+                    props.navigation.navigate("Login");
+                })
+                .catch(() => {
+                    setRegisterError("Falló al guardar los datos del usuario.");
+                });
+            })
+            .catch(() => {
+                setRegisterError("Falló el registro.");
+            });
+    }
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Registro</Text>
-      {error !== '' && <Text style={styles.errorText}>{error}</Text>}
-      <TextInput
-        style={styles.field}
-        keyboardType="email-address"
-        placeholder="Ingrese su email"
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-      />
-      <TextInput
-        style={styles.field}
-        keyboardType="default"
-        placeholder="Ingrese su nombre de usuario"
-        onChangeText={(text) => setUsername(text)}
-        value={username}
-      />
-      <TextInput
-        style={styles.field}
-        keyboardType="default"
-        placeholder="Ingrese su contraseña"
-        secureTextEntry={true}
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-      />
-      <Pressable style={styles.button} onPress={onSubmit}>
-        <Text style={styles.buttonText}>Registrate</Text>
-      </Pressable>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Text style={styles.titulo}>Registro</Text>
+
+            <TextInput
+                style={styles.input}
+                keyboardType="email-address"
+                placeholder="Ingresá tu email"
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Ingresá tu usuario"
+                onChangeText={(text) => setUserName(text)}
+                value={userName}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Ingresá tu contraseña"
+                secureTextEntry={true}
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+            />
+
+            {
+                registerError !== "" ?
+                    <Text style={styles.error}>{registerError}</Text>
+                :
+                    null
+            }
+
+            <Pressable style={styles.boton} onPress={onSubmit}>
+                <Text style={styles.textoBoton}>Registrarme</Text>
+            </Pressable>
+
+            <Pressable style={styles.boton} onPress={() => props.navigation.navigate("Login")}>
+                <Text style={styles.textoBoton}>Ya tengo cuenta</Text>
+            </Pressable>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 10,
-    marginTop: 20,
-    width: '100%',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    textAlign: 'center'},
-  field: {
-    height: 50,
-    width: 250,
-    paddingVertical:
-    15, paddingHorizontal:
-    10, borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 6,
-    marginVertical: 10
-  },
-  button: {
-    backgroundColor: '#28a745',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 4,
-    marginTop: 10,
-    width: 250
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold'
-  },
-  errorText: {
-    color: 'red',
-    marginBottom: 10,
-    fontWeight: 'bold',
-    width: 250,
-    textAlign: 'center'
-  }
+    container: {
+        flex: 1,
+        backgroundColor: "white",
+        padding: 20,
+        paddingTop: 30
+    },
+
+    titulo: {
+        fontSize: 30,
+        fontWeight: "bold",
+        marginBottom: 20,
+        textAlign: "center"
+    },
+
+    input: {
+        height: 50,
+        borderWidth: 1,
+        borderColor: "#DED46F",
+        borderRadius: 6,
+        marginBottom: 10,
+        paddingHorizontal: 10
+    },
+
+    boton: {
+        backgroundColor: "#FCF9CF",
+        padding: 12,
+        borderRadius: 4,
+        marginTop: 10,
+        alignItems: "center"
+    },
+
+    textoBoton: {
+        color: "black"
+    },
+
+    error: {
+        color: "red",
+        marginTop: 10
+    }
 });
+
+export default Register;

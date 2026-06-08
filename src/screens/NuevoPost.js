@@ -1,8 +1,8 @@
 import { View, Text, TextInput, Pressable, StyleSheet } from "react-native"; 
 import { useState } from "react"; 
-import { auth, db } from "../firebase/config"; 
+import { db, auth } from "../firebase/config"; 
 
-export default function NuevoPost() {
+function NuevoPost() {
 
     const [descripcionPost, setDescripcionPost] = useState(""); 
 
@@ -12,6 +12,7 @@ export default function NuevoPost() {
             descripcionPost: descripcionPost, 
             email: auth.currentUser.email, 
             createdAt: Date.now(), 
+            likes: []
         })
         .then(() => {
             setDescripcionPost(""); 
@@ -74,4 +75,5 @@ const styles = StyleSheet.create({
         color: "black"
     }
 }); 
- 
+
+export default NuevoPost;
