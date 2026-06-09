@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, TextInput } from "react-native";
+import { View, Text, Pressable, StyleSheet, TextInput, Image } from "react-native";
 import { useState } from "react";
 import { auth } from "../firebase/config";
 
@@ -28,6 +28,8 @@ function Login(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>Ingresar</Text>
+
+            <Image source={require("../../assets/logo.png")} style={styles.logo}/>
 
             <TextInput
                 style={styles.input}
@@ -70,6 +72,13 @@ function Login(props) {
 }
 
 const styles = StyleSheet.create({
+    logo: {
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        alignSelf: "center",
+        marginBottom: 20,
+    },
     container: {
         flex: 1,
         backgroundColor: "white",
