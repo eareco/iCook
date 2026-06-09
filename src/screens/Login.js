@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     input: {
         height: 50,
         borderWidth: 1,
-        borderColor: "#DED46F",
+        borderColor: "#a63e4d",
         borderRadius: 6,
         marginBottom: 10,
         paddingHorizontal: 10
     },
 
     boton: {
-        backgroundColor: "#FCF9CF",
+        backgroundColor: "#a63e4d",
         padding: 12,
         borderRadius: 4,
         marginTop: 10,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
 
     textoBoton: {
-        color: "black"
+        color: "white"
     },
 
     error: {

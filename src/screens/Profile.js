@@ -29,14 +29,14 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   boton: {
-    backgroundColor: "#FCF9CF",
+    backgroundColor: "#a63e4d",
     padding: 14,
     borderRadius: 8,
     alignItems: "center",
   },
   textoBoton: {
-    color: "black",
-    fontSize: 16,
+    color: "white",
+    fontSize: 18,
   },
 });
 

@@ -40,7 +40,7 @@ function Post(props) {
                 onPress={yaLikeo ? unlike : like}
             >
                 <Text style={styles.textoBoton}>
-                    {yaLikeo ? "Quitar like" : "💛"}
+                    {yaLikeo ? "Quitar like" : "❤️"}
                 </Text>
             </Pressable>
         </View>
@@ -49,25 +49,24 @@ function Post(props) {
 
 const styles = StyleSheet.create({
     post: {
-        backgroundColor: "white",
+        backgroundColor:"#ebc9c6",
         padding: 15,
         marginBottom: 15,
         borderRadius: 10,
-        borderWidth: 1,
-        borderColor: "#ddd",
-        marginHorizontal: 10
+        borderWidth: 2,
+        borderColor:  "#a63e4d",
+        marginHorizontal: 10,
+        width: "20%",
     }, 
     email: {
         fontWeight: "bold", 
         marginBottom: 5
     }, 
     boton: {
-        backgroundColor: "#FCF9CF",
         padding: 12,
         borderRadius: 4,
         marginTop: 10,
         marginBottom: 10,
-        alignItems: "center"
     }, 
     textoBoton: {
         color: "black",

@@ -35,7 +35,7 @@ function NuevoPost() {
             />
 
             <Pressable style={styles.boton} onPress={crearPost}>
-                <Text style={styles.textoBoton}> Crear post</Text>
+                <Text style={styles.textoBoton}> Publicar post</Text>
             </Pressable>
 
         </View>
@@ -65,14 +65,15 @@ const styles = StyleSheet.create({
     }, 
 
     boton: {
-        backgroundColor: "#FCF9CF", 
+        backgroundColor:  "#a63e4d",
         padding: 12, 
         alignItems: "center", 
         borderRadius: 4
     }, 
 
     textoBoton: {
-        color: "black"
+        color: "white",
+        fontSize: 18,
     }
 }); 
 
