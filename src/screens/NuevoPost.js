@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1, 
         padding: 20, 
-        backgroundColor: "white"
+        backgroundColor:"#d9d9d9",
     }, 
 
     titulo: {
@@ -58,10 +58,12 @@ const styles = StyleSheet.create({
     }, 
 
     input: {
-        borderWidth: 1, 
-        borderColor: "#ccc", 
+        borderWidth: 2, 
+        borderColor: "#a63e4d",
+        borderRadius: "6px",
         padding: 10, 
-        marginBottom: 20
+        marginBottom: 20,
+        height: 120,
     }, 
 
     boton: {

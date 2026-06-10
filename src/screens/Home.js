@@ -49,7 +49,7 @@ function Home() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor:"#d9d9d9",
         padding: 20,
     },
     titulo: {

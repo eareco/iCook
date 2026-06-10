@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor:"#d9d9d9",
         padding: 20,
     },
 
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     },
 
     botonCerrar: {
-        backgroundColor: "#f4b6b6",
+        backgroundColor: "#a63e4d",
         padding: 15,
         borderRadius: 12,
         alignItems: "center",
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     textoCerrar: {
         fontSize: 18,
         fontWeight: "bold",
+        color: "white"
     },
 
 });

@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
 
     textoBoton: {
         color: "black",
-        fontSize: 22,
+        fontSize: 16,
         fontWeight: "bold"
     }
 });

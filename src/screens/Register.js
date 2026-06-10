@@ -68,8 +68,8 @@ function Register(props) {
                 <Text style={styles.textoBoton}>Registrarme</Text>
             </Pressable>
 
-            <Pressable style={styles.boton} onPress={() => props.navigation.navigate("Login")}>
-                <Text style={styles.textoBoton}>Ya tengo cuenta</Text>
+            <Pressable style={styles.boton1} onPress={() => props.navigation.navigate("Login")}>
+                <Text style={styles.textoBoton1}>Ya tengo cuenta</Text>
             </Pressable>
         </View>
     );
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor:"#d9d9d9",
         padding: 20,
         paddingTop: 30
     },
@@ -110,14 +110,28 @@ const styles = StyleSheet.create({
     boton: {
         backgroundColor: "#a63e4d",
         padding: 12,
-        borderRadius: 4,
+        borderRadius: 10,
         marginTop: 10,
+        alignItems: "center",
+        alignSelf: "center",
+        width: "30%"
+    },
+
+    boton1: {
+        padding: 12,
+        marginTop: 10,
+        marginBottom: 10,
         alignItems: "center"
     },
 
     textoBoton: {
         color: "white",
         fontSize: 18,
+    },
+
+    textoBoton1: {
+        color: "#a63e4d",
+        fontSize: "18px"
     },
 
     error: {
