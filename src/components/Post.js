@@ -55,15 +55,28 @@ function Post(props) {
 
             <Text>Likes: {likes.length}</Text>
 
-            <Pressable 
-                style={styles.boton} 
-                onPress={yaLikeo ? unlike : like}
-            >
-                <Text style={styles.textoBoton}>
-                    {yaLikeo ? "Quitar like" : "❤️"}
+            <View style={styles.contenedorBotones}>
+
+                <Pressable 
+                    style={styles.boton} 
+                    onPress={yaLikeo ? unlike : like}>
+                 <Text style={styles.textoBoton}>
+                {yaLikeo ? "Quitar like" : "❤️"}
                 </Text>
             </Pressable>
-        </View>
+
+            <Pressable
+                style={styles.botonComentario}
+                onPress={() =>
+                    props.navigation.navigate("Comentario", {
+                        postId: props.id
+                    })
+                }
+    >
+                <Text style={styles.textoComentario}>Comentar</Text>
+            </Pressable>
+            </View>
+        </View> 
     );
 }
 
