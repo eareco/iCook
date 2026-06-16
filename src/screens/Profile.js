@@ -1,6 +1,7 @@
 import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
 import { useEffect, useState } from "react";
 import { auth, db } from "../firebase/config";
+import DeletePost from "../components/DeletePost";
 
 function Profile(props) {
     const [misPosts, setMisPosts] = useState([]);
@@ -68,6 +69,12 @@ function Profile(props) {
                         <Text style={styles.descripcion}>
                             {item.data.descripcionPost}
                         </Text>
+
+                        <DeletePost
+                          id={item.id}
+                          misPosts={misPosts}
+                          setMisPosts={setMisPosts}
+                      />
 
                     </View>
                 )}

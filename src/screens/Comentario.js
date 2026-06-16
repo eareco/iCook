@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet, TextInput, Pressable, FlatList } from 'react-native';
 import { useState } from 'react';
+import { auth } from "../firebase/config";
+
 
 function Comments(props) {
 
@@ -16,7 +18,8 @@ function Comments(props) {
     function publicarComentario() {
         const nuevoComentario = {
             id: Date.now().toString(),
-            texto: comentario
+            texto: comentario,
+            usuario: auth.currentUser.email
         };
 
         setComentarios([nuevoComentario, ...comentarios]);
@@ -41,9 +44,13 @@ function Comments(props) {
                 data={comentarios}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) =>
-                    <View style={styles.comentario}>
-                        <Text>{item.texto}</Text>
-                    </View>
+                    
+                <View style={styles.comentario}>
+                    <Text style={styles.usuarioComentario}>
+                         {item.usuario}
+                     </Text>
+                    <Text>{item.texto}</Text>
+                </View>
                 }
             />
 
@@ -139,4 +146,10 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
     },
+
+    usuarioComentario: {
+    color: "gray",
+    fontSize: 12,
+    marginBottom: 5,
+    }
 });

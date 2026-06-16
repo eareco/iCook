@@ -76,7 +76,7 @@ function Register(props) {
 }
 
 const styles = StyleSheet.create({
-        logo: {
+    logo: {
         width: 120,
         height: 120,
         borderRadius: 60,
@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
         borderColor:  "#a63e4d",
         borderRadius: 6,
         marginBottom: 10,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        backgroundColor: "white"
     },
 
     boton: {
