@@ -1,13 +1,14 @@
-import { View, Text, StyleSheet, TextInput, Pressable, FlatList } from 'react-native';
-import { useState } from 'react';
-import { auth } from "../firebase/config";
-
+import { View, Text, StyleSheet, TextInput, Pressable, FlatList } from "react-native";
+import { useState, useEffect } from "react";
+import { auth, db } from "../firebase/config";
+import firebase from "../firebase/config";
 
 function Comments(props) {
 
-    const [comentarios, setComentarios] = useState([]);
     const [comentario, setComentario] = useState("");
+    const [comentarios, setComentarios] = useState([]);
 
+    const postId = props.route.params.postId;
     const email = props.route.params.email;
     const descripcionPost = props.route.params.descripcionPost;
     const createdAt = props.route.params.createdAt;
@@ -15,15 +16,39 @@ function Comments(props) {
 
     const fecha = createdAt ? new Date(createdAt).toLocaleString() : "";
 
+    useEffect(() => {
+        db.collection("posts")
+            .doc(postId)
+            .onSnapshot((doc) => {
+                if (doc.data().comments) {
+                    setComentarios(doc.data().comments);
+                } else {
+                    setComentarios([]);
+                }
+            });
+    }, []);
+
     function publicarComentario() {
-        const nuevoComentario = {
-            id: Date.now().toString(),
+        if (comentario === "") {
+            return;
+        }
+
+        let nuevoComentario = {
+            id: Date.now(),
             texto: comentario,
-            usuario: auth.currentUser.email
+            usuario: auth.currentUser.email,
+            createdAt: Date.now()
         };
 
-        setComentarios([nuevoComentario, ...comentarios]);
-        setComentario("");
+        db.collection("posts")
+            .doc(postId)
+            .update({
+                comments: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
+            })
+            .then(() => {
+                setComentario("");
+            })
+            .catch(error => console.log(error));
     }
 
     return (
@@ -42,15 +67,19 @@ function Comments(props) {
             <FlatList
                 style={styles.lista}
                 data={comentarios}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) =>
-                    
-                <View style={styles.comentario}>
-                    <Text style={styles.usuarioComentario}>
-                         {item.usuario}
-                     </Text>
-                    <Text>{item.texto}</Text>
-                </View>
+                    <View style={styles.comentario}>
+                        <Text style={styles.usuarioComentario}>
+                            {item.usuario}
+                        </Text>
+
+                        <Text>{item.texto}</Text>
+
+                        <Text style={styles.fechaComentario}>
+                            {new Date(item.createdAt).toLocaleString()}
+                        </Text>
+                    </View>
                 }
             />
 
@@ -64,6 +93,12 @@ function Comments(props) {
             <Pressable style={styles.boton} onPress={publicarComentario}>
                 <Text style={styles.textoBoton}>Publicar comentario</Text>
             </Pressable>
+
+            <View style={styles.menu}>
+                <Pressable onPress={() => props.navigation.navigate("HomeMenu")}>
+                    <Text style={styles.opcion}>Home</Text>
+                </Pressable>
+            </View>
 
         </View>
     );
@@ -148,8 +183,27 @@ const styles = StyleSheet.create({
     },
 
     usuarioComentario: {
-    color: "gray",
-    fontSize: 12,
-    marginBottom: 5,
-    }
+        color: "gray",
+        fontSize: 12,
+        marginBottom: 5,
+    },
+
+    fechaComentario: {
+        color: "gray",
+        fontSize: 11,
+        marginTop: 5,
+    },
+    menu: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        width: "60%",
+        marginTop: 20,
+    },
+
+    opcion: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#a63e4d",
+    },
+
 });

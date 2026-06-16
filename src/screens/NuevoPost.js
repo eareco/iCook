@@ -7,12 +7,15 @@ function NuevoPost() {
     const [descripcionPost, setDescripcionPost] = useState(""); 
 
     function crearPost() {
+        if (descripcionPost === "") {
+            return;
+        }
 
         db.collection("posts").add({
             descripcionPost: descripcionPost, 
             email: auth.currentUser.email, 
             createdAt: Date.now(), 
-            likes: []
+            likes: [],
         })
         .then(() => {
             setDescripcionPost(""); 
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     input: {
         borderWidth: 2, 
         borderColor: "#a63e4d",
-        borderRadius: "6px",
+        borderRadius: 6,
         padding: 10, 
         marginBottom: 20,
         height: 120,

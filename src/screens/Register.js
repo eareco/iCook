@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 
     textoBoton1: {
         color: "#a63e4d",
-        fontSize: "18px"
+        fontSize: 18
     },
 
     error: {

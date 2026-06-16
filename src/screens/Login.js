@@ -9,7 +9,7 @@ function Login(props) {
 
     function onSubmit() {
         if (!email.includes("@")){
-            setLoginError("Email mal formteado"); 
+            setLoginError("Email mal formateado"); 
             return;
         }
         if (password.length < 6){
@@ -123,12 +123,12 @@ const styles = StyleSheet.create({
 
     textoBoton: {
         color: "white",
-        fontSize: "18px"
+        fontSize: 18
     },
 
     textoBoton1: {
         color: "#a63e4d",
-        fontSize: "18px"
+        fontSize: 18
     },
 
     error: {
