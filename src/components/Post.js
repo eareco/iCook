@@ -66,15 +66,19 @@ function Post(props) {
             </Pressable>
 
             <Pressable
-                style={styles.botonComentario}
-                onPress={() =>
-                    props.navigation.navigate("Comentario", {
-                        postId: props.id
-                    })
-                }
-    >
-                <Text style={styles.textoComentario}>Comentar</Text>
-            </Pressable>
+            style={styles.botonComentario}
+            onPress={() =>
+                props.navigation.navigate("Comentario", {
+                    postId: props.id,
+                    email: props.data.email,
+                    descripcionPost: props.data.descripcionPost,
+                    createdAt: props.data.createdAt,
+                    likes: likes.length
+                })
+            }
+        >
+            <Text style={styles.textoComentario}>Comentar</Text>
+        </Pressable>
             </View>
         </View> 
     );
@@ -128,6 +132,18 @@ const styles = StyleSheet.create({
         color: "black",
         fontSize: 16,
         fontWeight: "bold"
+    },
+
+    botonComentario: {
+       backgroundColor: "#a63e4d",
+       paddingVertical: 8,
+       paddingHorizontal: 18,
+       borderRadius: 10,
+       marginLeft: "auto",
+    },
+
+    textoComentario: {
+        color: "white",
     }
 });
 

@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import NuevoPost from "../screens/NuevoPost";
-
 import Home from "../screens/Home"; 
 import Profile from "../screens/Profile"; 
+import Comments from "../screens/Comentario";
 
 const Tab = createBottomTabNavigator(); 
 
@@ -38,6 +38,14 @@ function HomeMenu() {
                     tabBarIcon: () => <FontAwesome name="user" size={24} color="black" />, 
                 }}
             /> 
+
+             <Tab.Screen 
+                name="Comentario"
+                component={Comments}
+                options={{
+                    tabBarItemStyle: { display: "none" },
+                }}
+            />
 
         </Tab.Navigator>
 

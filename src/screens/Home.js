@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
 import Post from "../components/Post"; 
 
-function Home() {
+function Home(props) {
 
     const [posts, setPosts] = useState([]);
 
@@ -40,7 +40,7 @@ function Home() {
                 data={posts}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) =>
-                    <Post id={item.id} data={item.data} />
+                    <Post id={item.id} data={item.data} navigation={props.navigation}/>
                 }
             />
         </View>
